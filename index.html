@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetLUX | 프리미엄 반려동물 라이프스타일</title>
+  </head>
+  <body>
+    <div id="app">
+       <header>
+      <a href="/" class="logo" style="cursor:pointer; text-decoration:none; color:inherit;">PetLUX</a>
+      <div class="header-right">
+        <nav>
+          <ul>
+            <li><a href="#" id="new-scroll-btn">New</a></li>
+            <li><a href="lookbook.html" target="_blank">Lookbook</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropbtn">Shop</a>
+              <div class="dropdown-content">
+                <a href="#">Clothing</a>
+                <a href="#">Accessories</a>
+                <a href="#">Toys</a>
+                <a href="#">Food</a>
+              </div>
+            </li>
+            <li><a href="about.html" target="_blank">About</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="auth-buttons">
+        <button id="cart-btn" class="icon-button" onclick="window.open('cart.html', '_blank')">
+          <img src="image copy 13.png" alt="장바구니">
+          <span id="cart-quantity-badge">0</span>
+        </button>
+        <button id="login-btn">로그인</button>
+        <button id="signup-btn">회원가입</button>
+        <button id="logout-btn" style="display:none;">로그아웃</button>
+        <span id="user-info"></span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="slideshow-container">
+        <div class="slides-wrapper">
+          <div class="slide">
+            <img src="image.png" alt="hero image 1">
+          </div>
+          <div class="slide">
+            <img src="image copy 8.png" alt="hero image 2">
+          </div>
+          <div class="slide">
+            <img src="image copy 9.png" alt="hero image 3">
+          </div>
+          <div class="slide">
+            <img src="image copy 12.png" alt="hero image 4">
+          </div>
+          <div class="slide">
+            <img src="image.png" alt="hero image 1">
+          </div>
+        </div>
+      </div>
+      <div class="hero-text">
+        <h1>Premium Lifestyle for Pets</h1>
+        <p>당신의 반려동물에게도 품격을</p>
+      </div>
+    </section>
+    <section class="collection" id="new-collection">
+      <h2>New Collection</h2>
+    <div class="slider-row">
+      <a href="product1.html?product=오가닉-니트&price=80000&image=image%20copy.png" class="hover-card-link">
+        <div class="hover-card">
+          <img src="image copy.png" alt="상품 이미지" />
+          <div class="hover-overlay">
+            <p class="title">오가닉 니트</p>
+            <p class="price" data-price="80000">80,000원</p>
+            <div class="plus-icon">+</div>
+          </div>
+        </div>
+      </a>
+      <a href="product1.html?product=해충방지-나시-Tee&price=30000&image=image%20copy%202.png" class="hover-card-link">
+        <div class="hover-card">
+          <img src="image copy 2.png" alt="상품 이미지" />
+          <div class="hover-overlay">
+            <p class="title">해충방지 나시 Tee</p>
+            <p class="price" data-price="30000">30,000원</p>
+            <div class="plus-icon">+</div>
+          </div>
+        </div>
+      </a>
+      <a href="product1.html?product=비즈-목걸이&price=15000&image=image%20copy%203.png" class="hover-card-link">
+        <div class="hover-card">
+          <img src="image copy 3.png" alt="상품 이미지" />
+          <div class="hover-overlay">
+            <p class="title">비즈 목걸이</p>
+            <p class="price" data-price="15000">15,000원</p>
+            <div class="plus-icon">+</div>
+          </div>
+        </div>
+      </a>
+      <a href="product1.html?product=blue-패딩&price=150000&image=image%20copy%204.png" class="hover-card-link">
+        <div class="hover-card">
+          <img src="image copy 4.png" alt="상품 이미지" />
+          <div class="hover-overlay">
+            <p class="title">blue 패딩</p>
+            <p class="price" data-price="150000">150,000원</p>
+            <div class="plus-icon">+</div>
+          </div>
+        </div>
+      </a>
+      <a href="product1.html?product=누가쳐다봐-나시&price=30000&image=image%20copy%205.png" class="hover-card-link">
+        <div class="hover-card">
+          <img src="image copy 5.png" alt="상품 이미지" />
+          <div class="hover-overlay">
+            <p class="title">누가쳐다봐 나시</p>
+            <p class="price" data-price="30000">30,000원</p>
+            <div class="plus-icon">+</div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <section class="collection">
+      <h2>Best</h2>
+      <div class="slider-row">
+        <a href="product1.html?product=기지개-하네스&price=80000&image=image%20copy%206.png" class="hover-card-link">
+        <div class="hover-card">
+          <img src="image copy 6.png" alt="상품 이미지" />
+          <div class="hover-overlay">
+            <p class="title">기지개 하네스</p>
+            <p class="price" data-price="80000">80,000원</p>
+            <div class="plus-icon">+</div>
+          </div>
+        </div>
+      </a>
+        <a href="product1.html?product=내꼬-장난감&price=15000&image=image%20copy%207.png" class="hover-card-link">
+        <div class="hover-card">
+          <img src="image copy 7.png" alt="상품 이미지" />
+          <div class="hover-overlay">
+            <p class="title">내꼬 장난감</p>
+            <p class="price" data-price="15000">15,000원</p>
+            <div class="plus-icon">+</div>
+          </div>
+        </div>
+      </a>
+      </div>
+    </section>
+    
+
+    <footer>
+      <p>© 2025 PetLUX. All rights reserved.</p>
+    </footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- Cart Modal Structure -->
+    <div id="cart-modal-overlay" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>장바구니</h2>
+        <div id="modal-product-info">
+          <h3 id="modal-product-title"></h3>
+          <div class="option-group">
+            <label for="color-select">Color:</label>
+            <select id="color-select">
+              <option value="option">option</option>
+              <option value="red">Red</option>
+              <option value="blue">Blue</option>
+              <option value="white">White</option>
+              <option value="pink">Pink</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="size-select">Size:</label>
+            <select id="size-select">
+              <option value="option">option</option>
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="s/m">S/M</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+            </select>
+          </div>
+          </div>
+          <div id="selected-product-details">
+          <!-- Selected product details will be displayed here -->
+        </div>
+        <div class="quantity-selector">
+          <button id="modal-quantity-minus">-</button>
+          <span id="modal-quantity">1</span>
+          <button id="modal-quantity-plus">+</button>
+        </div>
+        <button id="add-to-cart-btn">장바구니에 추가</button>
+        <div id="cart-items">
+          <!-- Cart items will be dynamically added here -->
+          <p>선택된 상품이 없습니다.</p>
+        </div>
+        <div class="cart-summary">
+          <p>총액: <span id="cart-total">0원</span></p>
+          <button id="go-to-cart-btn" class="checkout-btn" style="background-color: #808080; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 10px;" onmouseover="this.style.backgroundColor='#666666';" onmouseout="this.style.backgroundColor='#808080';">장바구니로 가기</button>
+          <button id="checkout-btn">결제하기</button>
+        </div>
+      </div>
+    </div>
+  <!-- A/B Test Popup Structure -->
+    <div id="ab-test-popup-overlay" class="modal-overlay">
+      <div class="modal-content popup-content">
+        <span class="close-button popup-close-button">&times;</span>
+        <div id="popup-a" class="popup-variant" style="display: none;">
+          <h2>New Collection</h2>
+          <p>새로운 컬렉션을 만나보세요!</p>
+          <img src="public/image copy.png" alt="New Collection Promotion" style="width: 100%; border-radius: 8px; margin-top: 1rem;">
+          <button class="btn-primary popup-button" onclick="closePopup()">자세히 보기</button>
+        </div>
+        <div id="popup-b" class="popup-variant" style="display: none;">
+          <h2>Best Items</h2>
+          <p>가장 사랑받는 아이템들을 확인하세요!</p>
+          <img src="public/image copy 6.png" alt="Best Items Promotion" style="width: 100%; border-radius: 8px; margin-top: 1rem;">
+          <button class="btn-primary popup-button" onclick="closePopup()">자세히 보기</button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <script>
+  document.getElementById('new-scroll-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('new-collection').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  function closePopup() {
+    document.getElementById('ab-test-popup-overlay').style.display = 'none';
+  }
+</script>
+</html>

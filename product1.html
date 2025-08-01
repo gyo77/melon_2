@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetLUX - 제품 상세</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="product1.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <a
+          href="/"
+          class="logo"
+          style="cursor: pointer; text-decoration: none; color: inherit"
+          >PetLUX</a
+        >
+        <div class="header-right">
+          <nav>
+            <ul>
+              <li><a href="index.html#new-collection">New</a></li>
+              <li><a href="lookbook.html" target="_blank">Lookbook</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropbtn">Shop</a>
+                <div class="dropdown-content">
+                  <a href="#">Clothing</a>
+                  <a href="#">Accessories</a>
+                  <a href="#">Toys</a>
+                  <a href="#">Food</a>
+                </div>
+              </li>
+              <li><a href="about.html" target="_blank">About</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="auth-buttons">
+          <button
+            id="cart-btn"
+            class="icon-button"
+            onclick="window.open('cart.html', '_blank')"
+          >
+            <img src="public/image copy 13.png" alt="장바구니" />
+            <span id="cart-quantity-badge">0</span>
+          </button>
+          <button id="login-btn">로그인</button>
+          <button id="signup-btn">회원가입</button>
+          <button id="logout-btn" style="display: none">로그아웃</button>
+          <span id="user-info"></span>
+        </div>
+      </header>
+
+      <main class="product-details-container">
+        <div class="product-image-section">
+          <img src="public/image copy.png" alt="오가닉 니트" />
+        </div>
+        <div class="product-info-section">
+          <h1 class="product-title">오가닉 니트</h1>
+          <p class="product-description">
+            부드러운 오가닉 코튼으로 제작되어 반려동물의 피부에 자극이 적습니다.
+            신축성이 좋아 활동적인 아이들에게도 편안함을 선사합니다.
+          </p>
+          <p class="product-price">80,000원</p>
+
+          <div class="product-options">
+            <div class="option-group">
+              <label for="color-select">Color:</label>
+              <select id="color-select">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="white">White</option>
+                <option value="pink">Pink</option>
+              </select>
+            </div>
+            <div class="option-group">
+              <label for="size-select">Size:</label>
+              <select id="size-select">
+                <option value="xs">XS</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="quantity-selector">
+            <button id="quantity-minus">-</button>
+            <span id="quantity">1</span>
+            <button id="quantity-plus">+</button>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-primary">장바구니에 추가</button>
+            <button class="btn-secondary">바로 구매하기</button>
+          </div>
+
+          <div
+            id="selected-details"
+            style="margin-top: 12px; font-size: 1rem; display: none"
+          ></div>
+        </div>
+      </main>
+
+      <footer>
+        <p>© 2025 PetLUX. All rights reserved.</p>
+      </footer>
+    </div>
+    <script src="product1.js"></script>
+  </body>
+</html>

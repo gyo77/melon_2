@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>장바구니</title>
+    <style>
+      body {
+        font-family: "Noto Sans KR", Arial, sans-serif;
+        background: #f8f8f8;
+        margin: 0;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 32px;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+      }
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #222;
+        text-decoration: none;
+        letter-spacing: -1px;
+      }
+      .cart-container {
+        max-width: 600px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        padding: 32px 24px 24px 24px;
+      }
+      h2 {
+        text-align: left;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 24px;
+        color: #222;
+      }
+      .cart-table th,
+      .cart-table td {
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+      }
+      .cart-table th {
+        background: #f6f6f6;
+        font-size: 1rem;
+        color: #222;
+        font-weight: 600;
+      }
+      .cart-table td {
+        background: #fff;
+      }
+      .empty {
+        text-align: center;
+        color: #aaa;
+        margin: 40px 0;
+        font-size: 1.1rem;
+      }
+      .cart-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border-top: 1px solid #eee;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+        padding: 18px 0;
+        z-index: 10;
+      }
+      @media (max-width: 700px) {
+        .cart-container {
+          max-width: 98vw;
+          padding: 16px 4vw 24px 4vw;
+        }
+        header {
+          padding: 12px 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo">PetLUX</a>
+    </header>
+    <div class="cart-container">
+      <div class="cart-table-wrapper">
+        <table
+          class="cart-table"
+          style="width: 100%; border-collapse: collapse"
+        >
+          <thead>
+            <tr>
+              <th>상품정보</th>
+              <th>옵션</th>
+              <th>수량</th>
+              <th>금액</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items"></tbody>
+        </table>
+        <div id="empty-cart" class="empty" style="display: none">
+          장바구니가 비어있습니다.
+        </div>
+      </div>
+      <div
+        class="cart-guide"
+        style="
+          margin: 32px 0 16px 0;
+          color: #888;
+          font-size: 0.98rem;
+          line-height: 1.7;
+        "
+      >
+        <ul style="padding-left: 18px">
+          <li>장바구니에 최대 200개의 상품을 담을 수 있습니다.</li>
+          <li>장바구니 상품은 최대 90일간 저장됩니다.</li>
+          <li>
+            장바구니에 담긴 상품은 옵션 또는 특수상품 단위로 최대 100개의 상품만
+            동시 주문할 수 있습니다.
+          </li>
+          <li>가격, 옵션 등 정보가 변경된 경우 주문이 제한될 수 있습니다.</li>
+          <li>
+            오늘출발 상품은 판매자의 상황에 의해 제공되며,
+            묶음배송/무료배송/사은품/쿠폰 등은 실제와 다를 수 있습니다.
+          </li>
+          <li>
+            일부 상품의 경우 발급/이벤트/카드사 제공 지원금/할인권이 제한적
+            제공될 수 있습니다.
+          </li>
+          <li>
+            장바구니에 보여지는 배송비는 배송조건에 따라 실제 배송비가 다를 수
+            있으며, 주문 조건에 따라 도서산간/비용 등이 추가 발생할 수 있습니다.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="cart-bottom-bar">
+      <div
+        style="
+          max-width: 600px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <div style="font-size: 1.15rem; font-weight: 600; color: #222">
+          총 <span id="cart-count">0</span>건 주문금액
+          <span id="cart-total">0원</span>
+        </div>
+        <div style="display: flex; gap: 12px">
+          <button
+            id="gift-btn"
+            style="
+              background: #fff;
+              color: #222;
+              border: 1.5px solid #222;
+              font-size: 1.08rem;
+              padding: 10px 32px;
+              border-radius: 8px;
+              font-weight: 600;
+              cursor: pointer;
+            "
+          >
+            선물하기
+          </button>
+          <button
+            id="checkout-btn"
+            style="
+              background: #222;
+              color: #fff;
+              border: none;
+              font-size: 1.08rem;
+              padding: 10px 32px;
+              border-radius: 8px;
+              font-weight: 600;
+              cursor: pointer;
+            "
+          >
+            주문하기
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function renderCart() {
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const cartItemsContainer = document.getElementById("cart-items");
+        const cartTotalSpan = document.getElementById("cart-total");
+        const cartCountSpan = document.getElementById("cart-count");
+        const emptyCartDiv = document.getElementById("empty-cart");
+        cartItemsContainer.innerHTML = "";
+        let total = 0;
+
+        if (cart.length === 0) {
+          emptyCartDiv.style.display = "block";
+        } else {
+          emptyCartDiv.style.display = "none";
+          cart.forEach((item, idx) => {
+            let productImage = "public/image.png";
+            if (item.name.includes("해충방지 나시 Tee")) {
+              productImage = "public/image copy 2.png";
+            } else if (item.name.includes("오가닉 니트")) {
+              productImage = "public/image copy.png";
+            } else if (item.name.includes("비즈 목걸이")) {
+              productImage = "public/image copy 2.png";
+            } else if (item.name.includes("blue 패딩")) {
+              productImage = "public/image copy 4.png";
+            } else if (item.name.includes("누가쳐다봐 나시")) {
+              productImage = "public/image copy 5.png";
+            } else if (item.name.includes("기지개 하네스")) {
+              productImage = "public/image copy 6.png";
+            } else if (item.name.includes("내꼬 장난감")) {
+              productImage = "public/image copy 7.png";
+            }
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td style='padding:12px 0;vertical-align:middle;'>
+                <div style='display:flex;align-items:center;gap:12px;'>
+                  <img src='${productImage}' alt='상품이미지' style='width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #eee;' />
+                  <div>
+                    <div style='font-size:1.05rem;font-weight:500;color:#222;'>${
+                      item.name
+                    }</div>
+                  </div>
+                </div>
+              </td>
+              <td style='text-align:center;font-size:1rem;color:#555;vertical-align:middle;'>
+                <select class='cart-color' data-index='${idx}' style='margin-right:6px;padding:2px 8px;border-radius:6px;'>
+                  <option value='화이트' ${
+                    item.color === "화이트" ? "selected" : ""
+                  }>화이트</option>
+                  <option value='블랙' ${
+                    item.color === "블랙" ? "selected" : ""
+                  }>블랙</option>
+                  <option value='베이지' ${
+                    item.color === "베이지" ? "selected" : ""
+                  }>베이지</option>
+                  <option value='핑크' ${
+                    item.color === "핑크" ? "selected" : ""
+                  }>핑크</option>
+                  <option value='그레이' ${
+                    item.color === "그레이" ? "selected" : ""
+                  }>그레이</option>
+                </select>
+                <select class='cart-size' data-index='${idx}' style='padding:2px 8px;border-radius:6px;'>
+                  <option value='S' ${
+                    item.size === "S" ? "selected" : ""
+                  }>S</option>
+                  <option value='M' ${
+                    item.size === "M" ? "selected" : ""
+                  }>M</option>
+                  <option value='L' ${
+                    item.size === "L" ? "selected" : ""
+                  }>L</option>
+                  <option value='XL' ${
+                    item.size === "XL" ? "selected" : ""
+                  }>XL</option>
+                </select>
+              </td>
+              <td style='text-align:center;vertical-align:middle;'>
+                <button class='cart-qty-minus' data-index='${idx}' style='margin-right:6px;padding:2px 8px;border-radius:6px;background:#eee;border:none;cursor:pointer;'>-</button>
+                <span style='font-size:1.05rem;font-weight:500;'>${
+                  item.quantity
+                }</span>
+                <button class='cart-qty-plus' data-index='${idx}' style='margin-left:6px;padding:2px 8px;border-radius:6px;background:#eee;border:none;cursor:pointer;'>+</button>
+              </td>
+              <td style='text-align:center;vertical-align:middle;'>
+                <span style='font-size:1.05rem;font-weight:600;color:#222;'>${(
+                  item.price * item.quantity
+                ).toLocaleString()}원</span>
+              </td>
+              <td style='text-align:center;vertical-align:middle;'>
+                <button class='remove-item' data-index='${idx}' style='background:#fff;border:1px solid #eee;border-radius:6px;padding:4px 10px;font-size:0.95rem;color:#888;cursor:pointer;'>삭제</button>
+              </td>
+            `;
+            cartItemsContainer.appendChild(tr);
+            total += item.price * item.quantity;
+          });
+        }
+        cartTotalSpan.innerText = total.toLocaleString() + "원";
+        cartCountSpan.innerText = cart.length;
+
+        // 삭제 버튼 이벤트
+        document.querySelectorAll(".remove-item").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const idx = this.dataset.index;
+            cart.splice(idx, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+          });
+        });
+
+        // 수량 증감 이벤트
+        document.querySelectorAll(".cart-qty-minus").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const idx = this.dataset.index;
+            if (cart[idx].quantity > 1) {
+              cart[idx].quantity--;
+              localStorage.setItem("cart", JSON.stringify(cart));
+              renderCart();
+            }
+          });
+        });
+        document.querySelectorAll(".cart-qty-plus").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const idx = this.dataset.index;
+            cart[idx].quantity++;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+          });
+        });
+        // 옵션 변경 이벤트
+        document.querySelectorAll(".cart-color").forEach((sel) => {
+          sel.addEventListener("change", function () {
+            const idx = this.dataset.index;
+            cart[idx].color = this.value;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+          });
+        });
+        document.querySelectorAll(".cart-size").forEach((sel) => {
+          sel.addEventListener("change", function () {
+            const idx = this.dataset.index;
+            cart[idx].size = this.value;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+          });
+        });
+      }
+      window.onload = renderCart;
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("checkout-btn").onclick = function () {
+          alert("주문 기능은 곧 제공됩니다.");
+        };
+        document.getElementById("gift-btn").onclick = function () {
+          alert("선물 기능은 곧 제공됩니다.");
+        };
+      });
+    </script>
+  </body>
+</html>

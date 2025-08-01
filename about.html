@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetLUX | About</title>
+  <link rel="stylesheet" href="src/style.css" />
+  <link rel="stylesheet" href="about.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <a href="/" class="logo" style="cursor:pointer; text-decoration:none; color:inherit;">PetLUX</a>
+      <div class="header-right">
+        <nav>
+          <ul>
+            <li><a href="index.html#new-collection">New</a></li>
+            <li><a href="lookbook.html" target="_blank">Lookbook</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropbtn">Shop</a>
+              <div class="dropdown-content">
+                <a href="#">Clothing</a>
+                <a href="#">Accessories</a>
+                <a href="#">Toys</a>
+                <a href="#">Food</a>
+              </div>
+            </li>
+            <li><a href="about.html" target="_blank">About</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="auth-buttons">
+        <button id="cart-btn" class="icon-button" onclick="window.open('cart.html', '_blank')">
+          <img src="public/image copy 13.png" alt="장바구니">
+          <span id="cart-quantity-badge">0</span>
+        </button>
+        <button id="login-btn">로그인</button>
+        <button id="signup-btn">회원가입</button>
+        <button id="logout-btn" style="display:none;">로그아웃</button>
+        <span id="user-info"></span>
+      </div>
+    </header>
+
+    <main class="about-container">
+      <div class="about-header">
+        <h1>About PetLUX</h1>
+        <p>당신의 반려동물에게도 품격을</p>
+      </div>
+      <div class="about-content">
+        <p>PetLUX는 단순한 펫샵이 아닙니다. 우리는 반려동물과 함께하는 삶의 모든 순간이 특별하고 의미 있어야 한다고 믿습니다. 최고급 소재, 세련된 디자인, 그리고 반려동물의 편안함을 최우선으로 생각하는 철학을 바탕으로, PetLUX는 당신과 당신의 소중한 가족, 반려동물에게 최상의 라이프스타일을 제안합니다.</p>
+        <p>우리의 모든 제품은 장인의 손길을 거쳐 세심하게 제작되며, 반려동물의 건강과 안전을 위해 가장 엄격한 기준을 통과한 소재만을 사용합니다. PetLUX와 함께라면, 당신의 반려동물은 어디에서나 주목받는 스타일 아이콘이 될 것입니다.</p>
+        <p>PetLUX는 반려동물을 향한 당신의 사랑과 정성을 이해합니다. 그 마음을 담아, 우리는 단순한 제품을 넘어선 가치와 경험을 제공하기 위해 끊임없이 노력할 것입니다.</p>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 PetLUX. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,850 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Header and Navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2vw; /* Adjusted for responsiveness */
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 3.5rem; /* Original gap */
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #222;
+  font-family: "Playfair Display", serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.13em;
+  font-weight: 400;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #888;
+}
+
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.auth-buttons button {
+  background: #fff;
+  color: #222;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 0.45rem 1.2rem;
+  font-size: 1rem;
+  font-family: "Nanum Gothic", sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.auth-buttons button:hover {
+  background: #222;
+  color: #fff;
+  border: 1px solid #222;
+}
+
+.auth-buttons #logout-btn {
+  background: #f7f7f7;
+  color: #888;
+  border: 1px solid #eee;
+}
+
+.auth-buttons #logout-btn:hover {
+  background: #eaeaea;
+  color: #222;
+  border: 1px solid #bbb;
+}
+
+.auth-buttons #user-info {
+  margin-left: 0.7rem;
+  font-size: 0.97rem;
+  color: #444;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+/* Cart Button Specific Styles */
+#cart-btn {
+  padding: 0.45rem 0.8rem; /* Adjust padding for icon button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* For badge positioning */
+}
+
+#cart-btn img {
+  height: 1.2rem; /* Adjust icon size */
+  width: auto;
+}
+
+#cart-quantity-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  min-width: 18px;
+  text-align: center;
+  display: none; /* Hidden by default, show only when quantity > 0 */
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 70vh; /* Set height to 70% of viewport height */
+  overflow: hidden;
+  max-width: 1200px; /* Max width for the hero section */
+  margin: 0 auto; /* Center the hero section */
+}
+
+.slideshow-container {
+  position: relative;
+  height: 100%;
+  overflow: hidden; /* Ensure slides don't overflow */
+}
+
+.slides-wrapper {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out; /* Smooth transition for sliding */
+}
+
+.slide {
+  min-width: 100%; /* Each slide takes full width of container */
+  height: 100%;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 80%;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  right: 5vw; /* Adjusted to be responsive */
+  transform: translateY(-50%);
+  color: white;
+  text-align: right;
+  z-index: 1;
+  max-width: 30%; /* Adjusted to be responsive */
+}
+
+.hero-text h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  text-wrap: balance;
+}
+
+/* Collection Section */
+.collection {
+  padding: 4rem 5vw; /* Consolidated padding */
+  text-align: center;
+}
+
+.collection h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.slider-row {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.slider-row .hover-card {
+  display: inline-block;
+  margin: 0.5rem; /* Consolidated margin */
+  width: 200px; /* Original width */
+  height: 200px;
+  max-width: 28vw; /* Original max-width */
+  vertical-align: top;
+}
+
+.hover-card {
+  position: relative;
+  width: 200px; /* Consolidated width */
+  height: 200px; /* Added height for consistent sizing */
+  overflow: hidden;
+  border-radius: 4px; /* Consolidated border-radius */
+  margin: 0 1rem 2rem 1rem; /* Original margin */
+  display: inline-block;
+  vertical-align: top;
+}
+
+.hover-card img {
+  width: 100%;
+  height: 100%; /* Changed to 100% for consistent sizing with parent */
+  aspect-ratio: 1/1;
+  object-position: center -40%;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Consolidated background */
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0 0 12px 12px; /* Original border-radius */
+  opacity: 0;
+  transition: opacity 0.3s ease; /* Consolidated transition */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.hover-card a {
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.hover-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+.hover-card:hover .hover-overlay {
+  opacity: 1;
+}
+
+.plus-icon {
+  font-size: 1.5rem; /* Original font-size */
+  text-align: right;
+  margin-top: 0.5rem; /* Original margin-top */
+  cursor: pointer;
+}
+
+/* Grid (assuming this is for items outside slider) */
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.always-info {
+  display: block;
+  margin-top: 0.7rem;
+  text-align: center;
+  color: #111;
+  font-size: 1.15rem;
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  background: none;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.item {
+  width: 250px;
+}
+
+.item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.item p {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Responsive adjustments (media queries would be better, but consolidating existing direct rules) */
+/* These rules were previously scattered and conflicting, now consolidated and ordered */
+
+/* For smaller screens, adjust header and hero image */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1rem 2vw;
+  }
+  nav ul {
+    gap: 1.5rem;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  nav a {
+    font-size: 1rem;
+  }
+  .slider-row .hover-card {
+    width: 45vw;
+    max-width: 180px;
+  }
+  .collection {
+    padding: 2rem 2vw;
+  }
+  .hero {
+    height: 40vh;
+  }
+  .hero-text {
+    max-width: 80%;
+    right: 5vw;
+    left: auto;
+    transform: translateY(-50%);
+    text-align: right;
+  }
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+/* For even smaller screens */
+@media (max-width: 480px) {
+  .slider-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .slider-row .hover-card {
+    width: 45vw;
+    max-width: 180px;
+    margin: 0.5rem auto;
+  }
+  .collection {
+    padding: 1rem 1vw;
+  }
+}
+
+/* Text styles for hover overlay */
+.hover-overlay p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.hover-overlay .title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Plus icon in hover overlay */
+.plus-icon {
+  font-size: 2rem;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Cart Modal Styles */
+.modal-overlay {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto; /* Center the modal */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more responsive */
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
+}
+
+#modal-product-info {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+#modal-product-info h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.option-group {
+  margin-bottom: 15px;
+}
+
+.option-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.option-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#add-to-cart-btn {
+  background-color: #007bff; /* Blue */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  width: 100%;
+}
+
+#add-to-cart-btn:hover {
+  background-color: #0056b3;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#cart-items {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item p {
+  margin: 0;
+}
+
+.item-details {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.item-price {
+  font-weight: bold;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.quantity-controls button {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.item-quantity {
+  padding: 0 8px;
+}
+
+.remove-item {
+  background-color: #dc3545; /* Red */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-item:hover {
+  background-color: #c82333;
+}
+
+.cart-summary {
+  margin-top: 20px;
+  text-align: right;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+#checkout-btn {
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+#checkout-btn:hover {
+  background-color: #45a049;
+}
+
+#selected-product-details {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  margin-bottom: 20px;
+  display: none; /* Hidden by default */
+}
+
+#selected-product-details p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+#selected-product-details .item-price {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 700;
+  color: #222;
+}
+
+.quantity-selector {
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.quantity-selector button {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.quantity-selector button:hover {
+  background: #e0e0e0;
+}
+
+#modal-quantity {
+  padding: 0 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* New styles for modal design */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+}
+
+.modal-content {
+  background-color: #fff; /* White background */
+  border: none; /* Remove border */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  padding: 30px; /* More padding */
+}
+
+.modal-content {
+  background-color: #fff; /* White background */
+  border: none; /* Remove border */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  padding: 30px; /* More padding */
+}
+
+.popup-content {
+  max-width: 400px;
+  text-align: center;
+}
+
+.popup-content h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.popup-content p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.popup-button {
+  background-color: #222;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "Nanum Gothic", sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.popup-button:hover {
+  background-color: #555;
+}
+
+.popup-close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 32px;
+  color: #222;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: #222;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.close-button {
+  color: #222;
+  font-size: 32px;
+  top: 15px;
+  right: 20px;
+}
+
+#modal-product-info h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.option-group label {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 600;
+  color: #222;
+}
+
+.option-group select {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: "Nanum Gothic", sans-serif;
+  color: #555;
+}
+
+#add-to-cart-btn {
+  background-color: #222; /* Dark button */
+  font-family: "Nanum Gothic", sans-serif;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  display: none; /* Hidden by default */
+}
+
+#add-to-cart-btn:hover {
+  background-color: #555;
+}
+
+.cart-item {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.cart-item p {
+  font-family: "Nanum Gothic", sans-serif;
+  color: #333;
+}
+
+.item-price {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 700;
+  color: #222;
+}
+
+.quantity-controls button {
+  background: #f7f7f7;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  color: #222;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.quantity-controls button:hover {
+  background: #eaeaea;
+}
+
+.item-quantity {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 600;
+  color: #222;
+}
+
+.remove-item {
+  background-color: #dc3545;
+  font-family: "Nanum Gothic", sans-serif;
+  border-radius: 8px;
+}
+
+.remove-item:hover {
+  background-color: #c82333;
+}
+
+.cart-summary {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #222;
+}
+
+#checkout-btn {
+  background-color: #222; /* Dark button */
+  font-family: "Nanum Gothic", sans-serif;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+#checkout-btn:hover {
+  background-color: #555;
+}
+
+#selected-product-details p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+#selected-product-details strong {
+  color: #000;
+}
+
+.quantity-selector button {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+#modal-quantity {
+  font-family: "Nanum Gothic", sans-serif;
+}

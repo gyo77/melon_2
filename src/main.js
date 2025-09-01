@@ -1,36 +1,4 @@
-console.log("main.js loaded");
 import "./style.css";
-import { addData, getData } from "./firebase.js";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-
-// Firebase config와 초기화 (firebase.js와 중복 방지, 이미 초기화된 경우 재사용)
-const firebaseConfig = {
-  apiKey: "AIzaSyBTqVU1advrniQEF7C85jSmowgvRt1on88",
-  authDomain: "awoe-9be4f.firebaseapp.com",
-  projectId: "awoe-9be4f",
-  storageBucket: "awoe-9be4f.firebasestorage.app",
-  messagingSenderId: "669654639362",
-  appId: "1:669654639362:web:d3f79fa06aadcf742b981b",
-  measurementId: "G-4PXNGP643J",
-};
-let app;
-try {
-  app = initializeApp(firebaseConfig);
-} catch (e) {
-  // 이미 초기화된 경우
-  app = window.firebaseApp;
-}
-window.firebaseApp = app;
-const auth = getAuth();
-const db = getFirestore();
 
 document.addEventListener("DOMContentLoaded", function () {
   // A/B Test Popup Logic
@@ -51,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   abTestPopupOverlay.style.zIndex = "9999"; // Ensure popup is on top
   console.log("abTestPopupOverlay display set to flex");
 
-  popupCloseButtons.forEach(button => {
+  popupCloseButtons.forEach((button) => {
     button.addEventListener("click", () => {
       abTestPopupOverlay.style.display = "none";
     });
@@ -65,85 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
-  // 로그인/회원가입/로그아웃 버튼 및 사용자 정보 UI
-  const loginBtn = document.getElementById("login-btn");
-  const signupBtn = document.getElementById("signup-btn");
-  const logoutBtn = document.getElementById("logout-btn");
-  const userInfo = document.getElementById("user-info");
-
-  // Google OAuth 로그인
-  async function loginWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      // Firestore에 사용자 정보 저장
-      await setDoc(
-        doc(db, "users", user.uid),
-        {
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-          lastLogin: new Date().toISOString(),
-        },
-        { merge: true }
-      );
-      userInfo.textContent = `${user.displayName} (${user.email})`;
-      loginBtn.style.display = "none";
-      signupBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-    } catch (e) {
-      alert("로그인 실패: " + e.message);
-    }
-  }
-
-  // 회원가입(구글 계정으로)
-  async function signupWithGoogle() {
-    await loginWithGoogle();
-  }
-
-  // 로그아웃
-  async function logout() {
-    await signOut(auth);
-    userInfo.textContent = "";
-    loginBtn.style.display = "inline-block";
-    signupBtn.style.display = "inline-block";
-    logoutBtn.style.display = "none";
-  }
-
-  if (loginBtn) loginBtn.onclick = loginWithGoogle;
-  if (signupBtn) signupBtn.onclick = signupWithGoogle;
-  if (logoutBtn) logoutBtn.onclick = logout;
-
-  // 로그인 상태 감지
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      userInfo.textContent = `${user.displayName} (${user.email})`;
-      loginBtn.style.display = "none";
-      signupBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-    } else {
-      userInfo.textContent = "";
-      loginBtn.style.display = "inline-block";
-      signupBtn.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-    }
-  });
-  // hover-card 전체 클릭 시 조회수 저장
-  document.querySelectorAll(".hover-card").forEach((card) => {
-    const name = card.querySelector(".title")?.innerText || "";
-
-    card.addEventListener("click", async () => {
-      const viewedAt = new Date().toISOString();
-      await addData("views", { name, viewedAt });
-      // Firestore에서 다시 조회수 가져와서 갱신
-      const docs = await getData("views");
-      const count = docs.filter((d) => d.name === name).length;
-      console.log(`조회수 저장: ${name} - ${viewedAt} (총 ${count}회)`);
-    });
-  });
 
   // Cart Modal Logic
   const cartModalOverlay = document.getElementById("cart-modal-overlay");

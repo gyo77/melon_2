@@ -47,18 +47,35 @@ document.addEventListener("DOMContentLoaded", function () {
   colorSelect.addEventListener("change", updateDetails);
   sizeSelect.addEventListener("change", updateDetails);
 
-  addToCartBtn.addEventListener("click", function () {
+  // Supabase 연동
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+  const supabaseUrl =
+    "https://nxotqscywldeikfjclxf.supabase.co/rest/v1/nxotqscywldeikfjclxf"; // 실제 프로젝트 URL로 변경
+  const supabaseKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54b3Rxc2N5d2xkZWlrZmpjbHhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2ODA4OTQsImV4cCI6MjA3MjI1Njg5NH0.9eFspa8qlYhm4eTWgj8mBI2HWuksrY08jA5eYjAy6tA"; // 실제 키로 변경
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  addToCartBtn.addEventListener("click", async function () {
     // 상품 정보
     const product = {
       title: document.querySelector(".product-title").textContent,
       color: colorSelect.value,
       size: sizeSelect.value,
       quantity: quantity,
+      added_at: new Date().toISOString(),
     };
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartBadge();
+
+    // Supabase에 데이터 전송
+    const { data, error } = await supabase
+      .from("product_cart")
+      .insert([product]);
+    if (error) {
+      alert("Supabase 저장 실패: " + error.message);
+    }
 
     // 상세 내역 표시
     const detailsDiv = document.getElementById("selected-details");
